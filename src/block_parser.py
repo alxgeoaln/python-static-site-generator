@@ -49,7 +49,6 @@ def block_to_block_type(block):
 
     
 def block_node_to_html_node(block_node):
-    print("block_node_to_html_node", block_node)
     if block_node.block_type not in BlockType:
         raise ValueError(f"Block type is not available {block_node.block_type}")
     
@@ -139,7 +138,6 @@ def markdown_to_html_node(markdown):
             continue
         
         block_type = block_to_block_type(block)
-        print("BLOCKKKK", block, block_type)
         block_node = split_nodes_delimiter_blocks(block, block_type)
         
         node = block_node_to_html_node(block_node)

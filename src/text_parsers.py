@@ -10,7 +10,6 @@ imagesRegex = r"!\[([^\[\]]*)\]\(([^\(\)]*)\)"
 linksRegex = r"(?<!!)\[([^\[\]]*)\]\(([^\(\)]*)\)"
 
 def text_node_to_html_node(text_node):
-    print("TESTNODEEE", text_node)
     if text_node.text_type not in TextType:
         raise ValueError(f"Text type not available {text_node.text_type}")
     
@@ -25,10 +24,9 @@ def text_node_to_html_node(text_node):
     if text_node.text_type == TextType.CODE:
         node = LeafNode("code", text_node.text)
     if text_node.text_type == TextType.LINK:
-        node = LeafNode("a", text_node.text, {"href", text_node.url})
+        node = LeafNode("a", text_node.text, {"href": text_node.url})
     if text_node.text_type == TextType.IMAGE:
-        node = LeafNode("img", None, {"src": text_node.url, "alt": text_node.text_node.text})
-        
+        node = LeafNode("img", None, {"src": text_node.url, "alt": text_node.text})
     return node
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
@@ -132,6 +130,5 @@ def text_to_textnodes(text):
     text_code_nodes = split_nodes_delimiter(text_italic_nodes, "`", TextType.CODE)
     text_links_nodes = split_nodes_link(text_code_nodes)
     text_imgs_nodes = split_nodes_image(text_links_nodes)
-    
     return text_imgs_nodes
     

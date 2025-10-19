@@ -13,7 +13,6 @@ class HTMLNode():
         
         if self.props == None:
             return result
-        
         for key, value in self.props.items():
             result += f' {key}="{value}"'
         
@@ -30,7 +29,10 @@ class LeafNode(HTMLNode):
         self.props = props
     
     def to_html(self):
-        if len(self.value) == 0:
+        if self.value is None or len(self.value) == 0:
+            if self.value is None and self.tag:
+                # Self-closing tag (like <img>)
+                return f"<{self.tag}{self.props_to_html()}>"
             raise ValueError("All leaf nodes must have a value.")
         if not self.tag or len(self.tag) == 0:
             return self.value
@@ -53,8 +55,4 @@ class ParentNode(HTMLNode):
                 
         for child in self.children:
             children_tags += f"{child.to_html()}"
-            
-        print("children_tagschildren_tags", children_tags)
-        
-        
         return f"<{self.tag}{self.props_to_html()}>{children_tags}</{self.tag}>"
