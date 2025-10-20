@@ -1,7 +1,6 @@
-from textnode import TextNode, TextType
+from html import copy_static
 
 def main():
-    node = TextNode("heloo", TextType.TEXT, "www.www.com")
-    print(node)
+    copy_static()
     
 main()
