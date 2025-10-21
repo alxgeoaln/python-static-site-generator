@@ -92,30 +92,5 @@
 - **Code Review** - Providing constructive feedback
 - **Documentation** - Writing clear technical documentation
 
----
-
-## 📖 Currently Learning
-
-I'm always expanding my skill set. Currently exploring:
-- Advanced React Native performance optimization
-- Web3 and blockchain technologies
-- AI/ML integration in mobile apps
-- Advanced TypeScript patterns
-
----
-
-## 🎓 Development Philosophy
-
-```javascript
-const myApproach = {
-  codeQuality: "Clean, maintainable, and well-tested",
-  userExperience: "Intuitive and performant",
-  collaboration: "Open communication and teamwork",
-  learning: "Continuous improvement and staying current"
-};
-```
-
----
-
 [← Back Home](/) | [View Experience](/blog/experience) | [View Projects](/blog/projects)
 
