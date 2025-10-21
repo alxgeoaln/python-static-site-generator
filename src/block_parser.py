@@ -23,7 +23,7 @@ def block_to_block_type(block):
     heading = block.startswith(("# ", "## ", "### ", "#### ", "##### ", "###### "))
     code_blocks = block.startswith("```") and block.endswith("```")
     quote_block = block.startswith(">")
-    unordered_list = block.startswith("-") or block.startswith("*")
+    unordered_list = block.startswith("- ") or block.startswith("* ")
     
     if heading:
         return BlockType.HEADING
