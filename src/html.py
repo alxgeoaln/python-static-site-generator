@@ -3,7 +3,7 @@ import shutil
 
 from .block_parser import markdown_to_html_node
 
-PUBLIC_PATH = "./public"
+PUBLIC_PATH = "./docs"
 STATIC_PATH = "./static"
 
 def copy_static():
@@ -37,7 +37,7 @@ def extract_title(md_content):
         if item.startswith("#"):
             return item.split("#")[1]
     
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath="/"):
     md_content = None
     template_content = None
     
@@ -54,13 +54,17 @@ def generate_page(from_path, template_path, dest_path):
     
     html = template_content.replace("{{ Title }}", title).replace("{{ Content }}", content)
     
+    # Replace path references with basepath
+    html = html.replace('href="/', f'href="{basepath}')
+    html = html.replace('src="/', f'src="{basepath}')
+    
     print("dest_pathdest_path", dest_path)
     print("from_pathfrom_path", from_path)
     with open(dest_path, "x") as f:
         f.write(html)
         f.close()
         
-def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, basepath="/"):
     print("dest_dir_path::::", dest_dir_path)
     contents = os.listdir(dir_path_content)
     
@@ -70,11 +74,11 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
         
         if os.path.isfile(new_path_content):
             file_name = os.path.splitext(os.path.basename(new_path_content))[0]
-            generate_page(new_path_content, template_path, f"{dest_dir_path}/{file_name}.html")
+            generate_page(new_path_content, template_path, f"{dest_dir_path}/{file_name}.html", basepath)
             continue
         
         os.mkdir(new_path_dest)
-        generate_pages_recursive(new_path_content, template_path, new_path_dest)
+        generate_pages_recursive(new_path_content, template_path, new_path_dest, basepath)
         
     
     
